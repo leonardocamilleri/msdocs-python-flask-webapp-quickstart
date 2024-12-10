@@ -36,7 +36,7 @@ resource appService 'Microsoft.Web/sites@2022-03-01' = {
         }
         {
           name: 'DOCKER_REGISTRY_SERVER_URL'
-          value: 'https://${containerRegistry.properties.loginserver}/'
+          value: 'https://${containerRegistry.properties.loginServer}/'
         }
         {
           name: 'DOCKER_REGISTRY_SERVER_USERNAME'
