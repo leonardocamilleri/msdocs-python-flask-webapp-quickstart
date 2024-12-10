@@ -1,7 +1,10 @@
+@description('Prefix for resource names')
+param namePrefix string
+
 @description('Required. Name of your Azure Container Registry.')
 @minLength(5)
 @maxLength(50)
-param name string
+param name string = '${namePrefix}acr'
 
 @description('Enable admin user that have push / pull permission to the registry.')
 param acrAdminUserEnabled bool = true
@@ -10,7 +13,7 @@ param acrAdminUserEnabled bool = true
 param location string = resourceGroup().location
 
 @description('The name of the App Service')
-param appServiceName string
+param appServiceName string = '${namePrefix}-app'
 
 @description('The name of the container image')
 param containerRegistryImageName string
@@ -30,7 +33,7 @@ module containerRegistry 'modules/container-registry.bicep' = {
 module appServicePlan 'modules/app-service-plan.bicep' = {
   name: 'appServicePlanGuy'
   params: {
-    serviceName: 'appServicePlanGuy'
+    serviceName: '${namePrefix}-plan'
     serviceLocation: location
     skuName: 'B1'
     skuTier: 'Basic'
