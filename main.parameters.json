@@ -19,6 +19,9 @@
       },
       "containerRegistryImageVersion": {
         "value": "latest"
+      },
+      "acrAdminUserEnabled": {
+        "value": true
       }
     }
 }
