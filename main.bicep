@@ -28,11 +28,11 @@ module containerRegistry 'modules/container-registry.bicep' = {
 }
 
 module appServicePlan 'modules/app-service-plan.bicep' = {
-  name: 'appServicePlan'
+  name: 'appServicePlanGuy'
   params: {
-    servicePlanName: 'appServicePlan'
-    servicePlanLocation: location
-    servicePlanSku: {
+    name: 'appServicePlanGuy'
+    location: location
+    sku: {
       name: 'B1'
       capacity: 1
       tier: 'Basic'
@@ -41,7 +41,7 @@ module appServicePlan 'modules/app-service-plan.bicep' = {
 }
 
 module appService 'modules/app-service.bicep' = {
-  name: 'appService'
+  name: 'appServiceGuy'
   params: {
     name: appServiceName
     location: location

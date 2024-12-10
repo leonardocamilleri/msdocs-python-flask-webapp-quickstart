@@ -1,20 +1,20 @@
 @description('The name of the App Service Plan')
-param servicePlanName string
+param name string
 
 @description('The location for the App Service Plan')
-param servicePlanLocation string
+param location string
 
 @description('The SKU of the App Service Plan')
-param servicePlanSku object = {
+param sku object = {
   name: 'B1'
   tier: 'Basic'
   capacity: 1
 }
 
 resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
-  name: servicePlanName
-  location: servicePlanLocation
-  sku: servicePlanSku
+  name: name
+  location: location
+  sku: sku
   kind: 'linux'
   properties: {
     reserved: true
