@@ -1,8 +1,8 @@
 @description('The name of the App Service')
-param name string
+param appServiceName string
 
 @description('The location for the App Service')
-param location string
+param appServiceLocation string
 
 @description('The name of the App Service Plan')
 param appServicePlanName string
@@ -21,8 +21,8 @@ resource containerRegistry 'Microsoft.ContainerRegistry/registries@2023-07-01' e
 }
 
 resource appService 'Microsoft.Web/sites@2022-03-01' = {
-  name: name
-  location: location
+  name: appServiceName
+  location: appServiceLocation
   kind: 'app'
   properties: {
     serverFarmId: resourceId('Microsoft.Web/serverfarms', appServicePlanName)
