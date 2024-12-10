@@ -2,7 +2,7 @@
 param namePrefix string
 
 @description('Optional. Location for all resources.')
-param location string = resourceGroup().location
+param location string
 
 @description('Required. Name of your Azure Container Registry.')
 @minLength(5)
