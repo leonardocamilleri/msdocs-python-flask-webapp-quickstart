@@ -19,7 +19,7 @@ param containerRegistryImageName string
 param containerRegistryImageVersion string
 
 module containerRegistry 'modules/container-registry.bicep' = {
-  name: 'containerRegistryLeo'
+  name: 'registry-deployment'
   params: {
     name: name
     location: location
@@ -28,29 +28,31 @@ module containerRegistry 'modules/container-registry.bicep' = {
 }
 
 module appServicePlan 'modules/app-service-plan.bicep' = {
-  name: 'appServicePlanJorge'
+  name: 'appServicePlan'
   params: {
-    name: 'appServicePlanJorge'
-    location: location
-    sku: {
-      name: 'Basic'
+    servicePlanName: 'appServicePlan'
+    servicePlanLocation: location
+    servicePlanSku: {
+      name: 'B1'
       capacity: 1
-      family: 'B'
-      size: 'B1'
       tier: 'Basic'
     }
   }
 }
 
-
 module appService 'modules/app-service.bicep' = {
-  name: 'appServiceJorge'
+  name: 'appService'
   params: {
     name: appServiceName
     location: location
     appServicePlanName: appServicePlan.name
-    containerRegistryName: containerRegistry.name
+    containerRegistryName: name
     containerRegistryImageName: containerRegistryImageName
     containerRegistryImageVersion: containerRegistryImageVersion
   }
 }
+
+output containerRegistryLoginServer string = containerRegistry.outputs.loginServer
+output appServiceId string = appService.outputs.id
+output appServiceName string = appService.outputs.name
+output appServiceDefaultHostName string = appService.outputs.defaultHostName
