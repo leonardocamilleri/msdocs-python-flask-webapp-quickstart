@@ -21,18 +21,18 @@ param containerRegistryImageVersion string
 module containerRegistry 'modules/container-registry.bicep' = {
   name: 'registry-deployment'
   params: {
-    registryName: name
-    registryLocation: location
-    registryAdminUserEnabled: acrAdminUserEnabled
+    name: name
+    location: location
+    acrAdminUserEnabled: acrAdminUserEnabled
   }
 }
 
 module appServicePlan 'modules/app-service-plan.bicep' = {
   name: 'appServicePlanGuy'
   params: {
-    appServicePlanName: 'appServicePlanGuy'
-    appServicePlanLocation: location
-    appServicePlanSku: {
+    name: 'appServicePlanGuy'
+    location: location
+    sku: {
       name: 'B1'
       capacity: 1
       tier: 'Basic'
@@ -43,8 +43,8 @@ module appServicePlan 'modules/app-service-plan.bicep' = {
 module appService 'modules/app-service.bicep' = {
   name: 'appServiceGuy'
   params: {
-    appServiceName: appServiceName
-    appServiceLocation: location
+    name: appServiceName
+    location: location
     appServicePlanName: appServicePlan.name
     containerRegistryName: name
     containerRegistryImageName: containerRegistryImageName
